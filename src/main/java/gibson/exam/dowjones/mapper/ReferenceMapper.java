@@ -1,5 +1,6 @@
 package gibson.exam.dowjones.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import gibson.exam.dowjones.pojo.Reference;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -10,7 +11,7 @@ import java.util.List;
 
 @Mapper
 @Repository
-public interface ReferenceMapper {
+public interface ReferenceMapper extends BaseMapper<Reference> {
 
     @Select("SELECT * FROM reference WHERE stock = #{ticker}")
     List<Reference> fetchByTicker(String ticker);
