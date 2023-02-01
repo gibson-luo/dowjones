@@ -12,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -29,12 +28,12 @@ public class ReferenceController {
     }
 
     @PostMapping(value = "importData")
-    public ResponseEntity<Dto> importData(@RequestParam("file") MultipartFile file) throws IOException {
+    public ResponseEntity<Dto> importData(@RequestParam("file") MultipartFile file) {
         try {
             List<Reference> dataSet = CsvReader.loadObjectList(Reference.class, file);
             boolean result = referenceService.saveBatch(dataSet);
-        }catch (IOException e){
-            return DtoUtil.error(e);
+        }catch (Exception e){
+            return DtoUtil.error(BusinessError.IMPORT_DATA_FAILED, e);
         }
         return DtoUtil.ok();
     }

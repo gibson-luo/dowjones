@@ -24,4 +24,4 @@ CREATE TABLE "reference" (
     PRIMARY KEY ("id")
 );
 
-CREATE INDEX ON "reference" ("stock", "date");
+CREATE UNIQUE INDEX ON "reference" ("stock", "date");

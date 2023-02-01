@@ -1,5 +1,6 @@
 package gibson.exam.dowjones.common;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 public class DtoUtil {
@@ -30,10 +31,16 @@ public class DtoUtil {
         return ResponseEntity.internalServerError().body(dto);
     }
 
+    public static <T> ResponseEntity<Dto> internalError() {
+        Dto dto = new Dto();
+        dto.setCode("internal server error");
+        return ResponseEntity.internalServerError().body(dto);
+    }
+
     public static <T> ResponseEntity<Dto> error(BusinessError error, Exception e) {
         Dto dto = new Dto();
         dto.setCode(error.getCode());
-        dto.setResult(e.getMessage());
+        dto.setResult(e.getLocalizedMessage());
         return ResponseEntity.internalServerError().body(dto);
     }
 }
