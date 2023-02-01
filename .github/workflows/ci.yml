@@ -45,10 +45,13 @@ jobs:
           distribution: 'temurin'
 
       - name: Build with Maven
-        run: mvn install -f pom.xml
+        run: mvn install -DskipTests -f pom.xml
         env:
           # use postgres for the host here because we have specified a container for the job.
           # If we were running the job on the VM this would be localhost
           POSTGRES_HOST: postgres
           POSTGRES_PORT: ${{ job.services.postgres.ports[5432] }}
+
+      - name: Testing
+        run: mvn test -f pom.xml
 
