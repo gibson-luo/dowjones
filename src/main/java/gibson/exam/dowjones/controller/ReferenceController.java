@@ -45,6 +45,7 @@ public class ReferenceController {
         if(count > 0){
             return DtoUtil.error(BusinessError.RECORD_IS_EXIST);
         }
-        return DtoUtil.ok(referenceService.save(reference));
+
+        return referenceService.save(reference) ? DtoUtil.created() : DtoUtil.error(BusinessError.CREATE_FAILED);
     }
 }

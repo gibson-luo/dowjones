@@ -18,6 +18,12 @@ public class DtoUtil {
         return ResponseEntity.ok().body(dto);
     }
 
+    public static ResponseEntity<Dto> created() {
+        Dto dto = new Dto();
+        dto.setCode("Created");
+        return ResponseEntity.status(HttpStatus.CREATED).body(dto);
+    }
+
     public static <T> ResponseEntity<Dto> error(Exception e) {
         Dto dto = new Dto();
         dto.setCode("Error");
